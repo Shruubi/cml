@@ -1,0 +1,140 @@
+CML
+
+Written by Damon Swayn
+
+This software is provided under the BSD license:
+
+Copyright (c) 2012, Damon Swayn
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. All advertising materials mentioning features or use of this software
+   must display the following acknowledgement:
+   This product includes software developed by Damon Swayn.
+4. Neither the name of the copyright holder nor the
+   names of its contributors may be used to endorse or promote products
+   derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY Damon Swayn ''AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL Damon Swayn BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Basically, feel free to hack around, break shit and pass it on to your friends.
+I'd just like to get a little credit for my work.
+
+Usage:
+
+	Simple enough really, run the program by running "python main.py filename"
+where filename is to be substituted with a file containing CML compliant text.
+
+	The tags are fairly straight forward and require no real learning of new 
+concepts if you are already an adept C programmer already, although the average
+person with a basic understanding of any programming concepts would be able to
+figure out the jist of things.
+
+	The following tags pretty much sum up 90% of all the C programming language
+although I am no expert.
+
+NOTE: all attributes must be provided in the order they are given in or else the
+parser will throw a shit-fit, you have been warned.
+
+Main:
+
+The main function is simply defined by the opening tag:
+
+<main>
+
+and the closing tag
+
+</main>
+
+no need to define a return tag directly before the closing main tag if you are returning
+0 as this is inserted before the closing </main> automatically during the parsing. You can
+define a custom return value through the use of the return tag.
+
+Variables:
+
+variables are defined in the following manner:
+
+<var type="typename" name="varname">value/varname</var>
+
+and are modified thusly:
+
+<set name="varname">value/varname</set>
+
+pointers and references are valid:
+
+<var type="typename*" name="varname">value/varname</var>
+
+Functions:
+
+functions are defined similar to variables but the tag is called function instead of var:
+Note: like variables, pointer types are valid in function definitions
+
+<function type="typename" name="funcname" params="type param1, type param2...type paramN">
+..function body...
+etc..
+</function>
+
+function prototyping is done almost exactly the same. At the top of your CML file you can use
+the tag <prototype> which has the same attributes as function.
+Note: the prototype tag needs a seperate closing tag but has no tag body
+
+<prototype type="typename" name="funcname" params="type param1, type param2...type paramN"></prototype>
+
+And a function can be called as such:
+
+<call>funcName(param1, param2...paramN)</call>
+eg:
+<call>printf("hello world")</call>
+
+Selection and Looping:
+
+selection and looping all share very similar tags:
+
+<if/while/for cond="boolean_exp">
+block body
+etc...
+etc...
+</(if/while/for)>
+
+Note: the '(' and ')' around the if/while/for closing tag are just to make it easier to read, and are
+not necessary. ie - 
+
+<if cond="test == 5">
+	<call>printf(test)</call>
+</if>
+
+Complex Data Types:
+
+structs, unions and enums are all defined very similarly. Although enums are slightly special.
+
+<struct/union name="structname">
+	<var type="type" name="val1">1</var>
+	<var type="type" name="val2">2</var>
+	...
+	<var type="type" name="valN">14813290123</var>
+</(struct/union)>
+
+As I mentioned before, enums are a little special, as demonstrated:
+
+<enum name="enumName">
+	<enum-val>bob</enum-val>
+	<enum-val>jane</enum-val>
+	<enum-val-last>billy</enum-val>
+</enum>
+
+enum-val tags define an entity that belongs to an enum, and the last tag must always be enum-val-last.
