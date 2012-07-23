@@ -16,6 +16,8 @@ class parser:
     def convert(self, line):
         if(line == "<br />"):
             return "\n"
+        elif(line == ""):
+            return "\n"
         else: #this is where the magic happens...
             #now we need to get the tag name and atrributes etc
             workingVals = []
