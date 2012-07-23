@@ -1,3 +1,10 @@
+Changelog:
+-fixed the double period bug when the gcc compiler is executed
+-added handling for blank lines
+
+Known Bugs:
+-compiled binary will not run
+
 CML
 
 Written by Damon Swayn
