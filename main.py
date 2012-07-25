@@ -23,5 +23,5 @@ for line in parser.getGenerated():
     output.getFile().write("%s\n" % line)
 output.cleanup()
 
-os.system("gcc -c " + outputFile + " -o " + outputFilename + "o")
+os.system("gcc " + outputFile + " -o " + outputFilename + "o")
 print("successfully converted and compiled")
