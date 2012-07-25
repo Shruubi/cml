@@ -1,10 +1,6 @@
 
 Changelog:
--fixed the double period bug when the gcc compiler is executed
--added handling for blank lines
-
-Known Bugs:
--compiled binary will not run
+-fixed the gcc compile string, yes I know, I kinda failed hard there.
 
 CML
 
